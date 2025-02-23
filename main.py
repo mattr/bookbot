@@ -1,5 +1,5 @@
 import re
-
+import sys
 
 def read_file(path_to_file):
     with open(path_to_file) as f:
@@ -24,9 +24,10 @@ def count_for(character, count):
     return f"The '{character}' character was found {count} times"
 
 
-def print_report(text):
+def print_report(file):
+    text = read_file(file)
     character_map = character_count(text)
-    print("--- Begin report of books/frankenstein.txt ---")
+    print(f"--- Begin report of {file} ---")
     print(f"{word_count(text)} words found in the document")
     print("")
     for entry in character_map:
@@ -35,9 +36,10 @@ def print_report(text):
 
 
 def main():
-    path = "./books/frankenstein.txt"
-    text = read_file(path)
-    print_report(text)
+    if len(sys.argv) != 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+    print_report(sys.argv[1])
 
 
 main()
