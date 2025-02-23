@@ -1,28 +1,13 @@
 import re
 import sys
+from stats import character_count, word_count
 
 def read_file(path_to_file):
     with open(path_to_file) as f:
         return f.read()
 
-
-def word_count(text):
-    return len(text.split())
-
-
-def character_count(text):
-    chars = {}
-    lowered = text.lower()
-    for char in lowered:
-        if char not in chars:
-            chars[char] = 0
-        chars[char] += 1
-    return chars
-
-
 def count_for(character, count):
-    return f"The '{character}' character was found {count} times"
-
+    return f"{character}: {count}"
 
 def print_report(file):
     text = read_file(file)
